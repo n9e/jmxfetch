@@ -7,7 +7,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import javax.net.ssl.HttpsURLConnection;
+import java.net.HttpURLConnection;
+//import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -90,7 +91,7 @@ public class HttpClient {
                         };
                 sc = SSLContext.getInstance("SSL");
                 sc.init(null, this.dummyTrustManager, new java.security.SecureRandom());
-                HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+                //HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
             } catch (Exception e) {
                 log.debug("session token unavailable - not setting");
                 this.token = "";
@@ -102,15 +103,16 @@ public class HttpClient {
     public HttpResponse request(String method, String body, String path) {
         HttpClient.HttpResponse response = new HttpClient.HttpResponse(0, "");
         try {
-            String url = "https://" + host + ":" + port + "/" + path;
+            String url = "http://" + host + ":" + port + "/" + path;
             log.debug("attempting to connect to: " + url);
             log.debug("with body: " + body);
 
             URL uri = new URL(url);
-            HttpsURLConnection con = (HttpsURLConnection) uri.openConnection();
+            //HttpsURLConnection con = (HttpsURLConnection) uri.openConnection();
+            HttpURLConnection con = (HttpURLConnection) uri.openConnection();
 
             // add request header
-            con.setRequestMethod(method.toUpperCase());
+            //con.setRequestMethod(method.toUpperCase());
             con.setRequestProperty("Authorization", "Bearer " + this.token);
             con.setRequestProperty("User-Agent", USER_AGENT);
             if (method.toUpperCase().equals("GET")) {

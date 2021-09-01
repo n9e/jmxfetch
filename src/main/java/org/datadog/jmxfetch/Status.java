@@ -23,7 +23,7 @@ public class Status {
     public static final String STATUS_ERROR = "ERROR";
     private static final String INITIALIZED_CHECKS = "initialized_checks";
     private static final String FAILED_CHECKS = "failed_checks";
-    private static final String API_STATUS_PATH = "agent/jmx/status";
+    private static final String API_STATUS_PATH = "api/v1/status/jmx";
     private Map<String, Object> instanceStats;
     private Map<String, Object> info;
     private int errors;

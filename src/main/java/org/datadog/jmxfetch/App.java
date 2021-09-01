@@ -760,7 +760,7 @@ public class App {
         }
 
         try {
-            String uripath = "agent/jmx/configs?timestamp=" + lastJsonConfigTs;
+            String uripath = "api/v1/config/jmx?timestamp=" + lastJsonConfigTs;
             response = client.request("GET", "", uripath);
             if (!response.isResponse2xx()) {
                 log.warn(
